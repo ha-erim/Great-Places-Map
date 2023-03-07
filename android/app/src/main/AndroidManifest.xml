@@ -6,6 +6,8 @@
         android:label="flutter_complete_guide"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyDoUtSqKjXBulRZ9gdf4g-HP1w2q1ebYMU"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -4,12 +4,12 @@ import 'package:flutter/foundation.dart';
 class PlaceLocation {
   final double latitude; //위도
   final double longitude; //경도
-  final String address;
+  final String? address; //PlaceLocation에 required 빼고 ? 추가
 
-  PlaceLocation({
+  const PlaceLocation({
     required this.latitude,
     required this.longitude,
-    required this.address, //강의와 다르게 required 추가. error 발생
+    this.address,
   });
 }
 
