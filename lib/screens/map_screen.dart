@@ -8,19 +8,37 @@ class MapScreen extends StatefulWidget {
   final bool isSelecting;
 
   MapScreen(
-      {this.initialLocation =
-          const PlaceLocation(latitude: 35.8558, longitude: 128.4889),
+      {this.initialLocation = const PlaceLocation(
+          latitude: 35.8558, longitude: 128.4889, address: ''),
       this.isSelecting = false});
   @override
   State<MapScreen> createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
+  LatLng? _pickedLocation; //? 추가
+  void _selectLocation(LatLng position) {
+    setState(() {
+      _pickedLocation = position;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Your Map'),
+        actions: <Widget>[
+          if (widget.isSelecting)
+            IconButton(
+              onPressed: _pickedLocation == null
+                  ? null
+                  : () {
+                      Navigator.of(context).pop(_pickedLocation);
+                    },
+              icon: Icon(Icons.check),
+            ),
+        ],
       ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
@@ -28,6 +46,15 @@ class _MapScreenState extends State<MapScreen> {
               widget.initialLocation.longitude),
           zoom: 16,
         ),
+        onTap: widget.isSelecting ? _selectLocation : null,
+        markers: _pickedLocation == null
+            ? {}
+            : {
+                Marker(
+                  markerId: MarkerId('m1'),
+                  position: _pickedLocation!, //! 추가
+                ),
+              },
       ),
     );
   }
