@@ -1,6 +1,8 @@
 # flutter_complete_guide
 
-A new Flutter project.
+Udemy Fluuter & Dart Course
+Section 13 : Great Places Map
+The Latest Flutter version (23.03.17)
 
 ## Getting Started
 
